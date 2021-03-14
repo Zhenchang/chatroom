@@ -119,7 +119,6 @@ int main(int argc, char *argv[])
             }
             else if (fds[i].revents & POLLERR)
             {
-                //todo
                 printf("get an error from %d\n", fds[i].fd);
                 char errors[100];
                 memset(errors, '\0', 100);
@@ -133,9 +132,8 @@ int main(int argc, char *argv[])
             // For client connections
             else if (fds[i].revents & POLLRDHUP)
             {
-                // ???????????
-                users[fds[i].fd] = users[fds[user_counter].fd];
                 close(fds[i].fd);
+                users[fds[i].fd] = users[fds[user_counter].fd]; // ???
                 fds[i] = fds[user_counter];
                 i--;
                 user_counter--;
@@ -153,7 +151,7 @@ int main(int argc, char *argv[])
                     if (errno != EAGAIN)
                     {
                         close(connfd);
-                        users[fds[i].fd] = users[fds[user_counter].fd];
+                        users[fds[i].fd] = users[fds[user_counter].fd]; // ???
                         fds[i] = fds[user_counter];
                         i--;
                         user_counter--;
