@@ -1,4 +1,3 @@
-#define _GNU_SOURCE 1;
 #include <netinet/in.h>
 #include <poll.h>
 #include <sys/types.h>
@@ -31,12 +30,14 @@ int main(int argc, char *argv[])
 
     int sockfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(sockfd >= 0);
+    printf("socket created\n");
     if (connect(sockfd, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
     {
         printf("connection failed\n");
         close(sockfd);
         return 1;
     }
+    printf("socket connected with specified address\n");
 
     struct pollfd fds[2];
 

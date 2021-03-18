@@ -54,12 +54,15 @@ int main(int argc, char *argv[])
     // Create socket.
     int listenfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(listenfd >= 0);
+    printf("tcp socket created\n");
     // Bind the socket with the address.
     ret = bind(listenfd, (struct sockaddr *)&address, sizeof(address));
+    printf("socket binded with specified address\n");
     assert(ret != -1);
     // Start listen to the socket.
     ret = listen(listenfd, REQUEST_QUEUE_SIZE);
     assert(ret != -1);
+    printf("start listening to the socket\n");
 
     // For client connections indexed by fd.
     struct client_data *users = new client_data[FD_LIMIT];
